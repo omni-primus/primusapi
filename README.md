@@ -1,7 +1,9 @@
 # Primus API
 
 This project was built with Turbo 360. To learn more, click here: https://www.turbo360.co
+
 This API is used to display my League of Legends rank in my Twitch.tv chat.
+
 If you want to see it in action go to my Twitch channel: https://www.twitch.tv/omni_primus and type: !elo in my chat.
 
 ## Show the Rank
