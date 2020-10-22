@@ -4,7 +4,7 @@ const router = express.Router();
 
 // Variables
 var name = "OMNI Primus";
-var api = "RGAPI-218be8be-33d1-4037-b2d1-daea9f6829d1";
+var api = "";
 var id;
 var text1;
 var text2;
