@@ -22,7 +22,7 @@ const config = {
   // db: vertex.nedb()
 }
 
-vertex.configureApp(app, config)
+vertex.configureApp(app, config);
 
 // import routes
 const eloRoutes = require('./routes/elo');

@@ -33,6 +33,8 @@ function getELo(){
                                   var promo = daten2[i].miniSeries.progress;
                                   for(var j = 0; j<promo.length; j++){
                                       promo = promo.replace("N", "-");
+                                      promo = promo.replace("W", "✔");
+                                      promo = promo.replace("L", "X");
                                   }
                                   text1 += " (Promo: " + promo + (")");
                               }
@@ -42,7 +44,9 @@ function getELo(){
                               if(daten2[i].hasOwnProperty('miniSeries')){
                                   var promo = daten2[i].miniSeries.progress;
                                   for(var j = 0; j<promo.length; j++){
-                                      promo = promo.replace("N", "-");
+                                    promo = promo.replace("N", "-");
+                                    promo = promo.replace("W", "✔");
+                                    promo = promo.replace("L", "X");
                                   }
                                   text2 += " (Promo: " + promo + (")");
                               }
