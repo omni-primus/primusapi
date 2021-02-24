@@ -4,7 +4,7 @@ This project was built with Turbo 360. To learn more, click here: https://www.tu
 
 This API is used to display my League of Legends rank in my Twitch.tv chat.
 
-If you want to see it in action go to my Twitch channel: https://www.twitch.tv/omni_primus and type: !elo in my chat.
+If you want to see it in action go to my Twitch channel: https://www.twitch.tv/omni_primus and type: !elo in the chat.
 
 ## Show the Rank
 If you want to see the json result that Nightbot puts in my chat you can use the following link:
@@ -12,8 +12,6 @@ If you want to see the json result that Nightbot puts in my chat you can use the
 ```
 https://primusapi-5gkjz1.vertex360.co/elo/omni_primus
 ```
-
-If the link gives you no result, it's very likly that my Riot API Key expired. I'm still waiting to get a permanent key so I don't have to change the key daily.
 
 ## Instructions
 After cloning into repo, cd to project root directory and install dependencies:
