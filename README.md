@@ -11,9 +11,6 @@ If you want to see the json result that Nightbot puts in my chat you can use the
 
 ```
 https://primusapi-5gkjz1.vertex360.co/elo/omni_primus
-```
-
-If the link gives you no result, it's very likly that my Riot API Key expired. I'm still waiting to get a permanent key so I don't have to change the key daily.
 
 ## Instructions
 After cloning into repo, cd to project root directory and install dependencies:

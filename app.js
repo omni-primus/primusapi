@@ -25,10 +25,12 @@ const config = {
 vertex.configureApp(app, config);
 
 // import routes
-const eloRoutes = require('./routes/elo');
+const leagueRoutes = require('./routes/league');
+const valoRoutes = require('./routes/valorant');
 
 // set routes
-app.use('/elo', eloRoutes) // sample API Routes
+app.use('/league', leagueRoutes); // sample API Routes
+app.use('/valorant', valoRoutes);
 
 app.use(morgan('dev'));
 
@@ -43,9 +45,11 @@ app.use((res, req, next) => {
 });
 
 //Routes that handle Requests
-app.use('/elo', eloRoutes);
+app.use('/league', leagueRoutes);
+app.use('/valorant', valoRoutes);
+
 app.use((req, res, next) => {
-    const error = new Error('Not found');
+    const error = new Error('No such route was found.');
     error.status = 404;
     next(error);
 });
