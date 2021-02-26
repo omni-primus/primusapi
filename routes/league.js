@@ -4,7 +4,7 @@ const router = express.Router();
 
 // Variables
 var name;
-var api = "";
+var api = "RGAPI-aeb3fe73-79cd-450a-9e25-cad283b86531";
 var requestURL;
 var text;
 
@@ -88,7 +88,7 @@ router.get('/:SummonerName', (req, res, next) => {
     requestURL = 'https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/'+name+'?api_key='+api;
     getELo();
     setTimeout(function(){
-        if (SName === 'omni_primus' || 'Fl4mezzZ' || 'Beater_Zack'){
+        if (SName === 'omni_primus' || 'Fl4mezzZ'){
             res.status(200).json({
                 message: text
             });
