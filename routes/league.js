@@ -4,7 +4,7 @@ const router = express.Router();
 
 // Variables
 var name;
-var api = "RGAPI-aeb3fe73-79cd-450a-9e25-cad283b86531";
+var api = "";
 var requestURL;
 var text;
 

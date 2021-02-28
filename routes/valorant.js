@@ -18,18 +18,18 @@ async function getData(){
     return data;
 }
 
-//get the rank
+//get the rank via searching for last match of players puuid
 async function getRank(){
     var data = await getData();
-    var rank = 'Rank of this Player could not be found';
+    var rank = 'Could not find a match of this player';
     var playerpuuid;
-    //Getting puuid from Player
+    //Getting puuid of the player
     for (var i = 0; i < data.players.length; i++){
         if (data.players[i].gameName == PlayerName){
             playerpuuid =  data.players[i].puuid;
         }
     }
-    //getting rank from player via puuid
+    //search for players last match using the puuid
     for (var i = 0; i < data.matches.length; i++){
         for (var j = 0; j < data.matches[i].players.length; j++){
             if (data.matches[i].players[j].puuid == playerpuuid){
