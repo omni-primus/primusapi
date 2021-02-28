@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "express": "^4.17.1",
+    "node-fetch": "^2.6.1",
     "turbo360": "^1.8.69",
     "vertex360": "^0.30.39",
     "xmlhttprequest": "^1.8.0"
