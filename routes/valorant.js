@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const fetch = require("node-fetch");
 
-//Request URL -> Fake Extern Data for testing
+//Request URL -> Extern Data for testing (Riot API link goes here when access is granted)
 var requestURL = new URL('http://stelar7.no/valorant/eu/1609149216.json');
 
 //Name of Player you want to know the rank
@@ -21,9 +21,12 @@ async function getData(){
 //get the rank via searching for last match of players puuid
 async function getRank(){
     var data = await getData();
+
+    // default value for the rank
     var rank = 'Could not find a match of this player';
     var playerpuuid;
-    //Getting puuid of the player
+
+    //Get puuid of the player
     for (var i = 0; i < data.players.length; i++){
         if (data.players[i].gameName == PlayerName){
             playerpuuid =  data.players[i].puuid;
