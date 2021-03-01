@@ -1,9 +1,9 @@
 # Primus API
 
+Full Project Files: https://github.com/omni-primus/primusapi/tree/master
+
 This project was built with Turbo 360. To learn more, click here: https://www.turbo360.co
-
 This API is used to display the League of Legends or VALORANT rank in a twitch.tv chat.
-
 If you want to see it in action go to my Twitch channel: https://www.twitch.tv/omni_primus and type: !elo in the chat.
 
 ## Show the Rank
