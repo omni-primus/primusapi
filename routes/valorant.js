@@ -4,7 +4,7 @@ const router = express.Router();
 const fetch = require("node-fetch");
 
 //Request URL -> Extern Data for testing (Riot API link goes here when access is granted)
-let api = "RGAPI-2ac22f02-fabd-4539-b019-91cd08da13a3";
+let api = "";
 let requestURL = 'https://eu.api.riotgames.com/val/content/v1/contents?locale=de-DE&api_key='+api;
 let requestURL2;
 
