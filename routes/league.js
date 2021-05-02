@@ -22,6 +22,7 @@ function getELo(){
         if (this.readyState == 4 && this.status == 200){
             var daten = JSON.parse(this.responseText);
             id = daten.id;
+            console.log(id);
 
             request2.onreadystatechange = function(){
                 if (this.readyState == 4 && this.status == 200){
@@ -82,13 +83,12 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/:SummonerName', (req, res, next) => {
-    const SName = req.params.SummonerName;
+    let SName = req.params.SummonerName;
     name = SName;
-    console.log(name);
     requestURL = 'https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/'+name+'?api_key='+api;
     getELo();
     setTimeout(function(){
-        if (SName === 'omni_primus' || 'Fl4mezzZ'){
+        if (SName === 'omniprimus' || SName === 'Fl4mezzZ'){
             res.status(200).json({
                 message: text
             });

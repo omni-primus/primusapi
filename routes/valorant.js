@@ -4,63 +4,104 @@ const router = express.Router();
 const fetch = require("node-fetch");
 
 //Request URL -> Extern Data for testing (Riot API link goes here when access is granted)
-var requestURL = new URL('http://stelar7.no/valorant/eu/1609149216.json');
+let api = "RGAPI-2ac22f02-fabd-4539-b019-91cd08da13a3";
+let requestURL = 'https://eu.api.riotgames.com/val/content/v1/contents?locale=de-DE&api_key='+api;
+let requestURL2;
 
 //Name of Player you want to know the rank
-const PlayerName = 'Merkker';
-var timecode = '';
+let PlayerName;
 
-//get json from URL
-async function getData(){
-    var response = await fetch(requestURL);
-    var data = await response.json();
-    while(!data);
-    return data;
+//get the Act ID from Content API
+function getActId(callback){
+    fetch(requestURL).then (function(response) {
+
+        //Check for response error
+        if (response.status !== 200){
+            console.log('Looks like there was a problem. Status Code: '+ response.status);
+            return;
+        }
+        let actId;
+
+        //return the Act ID
+        response.json().then(function(data){
+            actId = data.acts[data.acts.length-2].id;
+            return callback(actId);
+        });
+    });
 }
 
-//get the rank via searching for last match of players puuid
-async function getRank(){
-    var data = await getData();
+//get the rank of a player via the Act ID
+function getRank(callback){
 
-    // default value for the rank
-    var rank = 'Could not find a match of this player';
-    var playerpuuid;
+    //get Act ID
+    getActId(function(actData){
+        requestURL2 = 'https://eu.api.riotgames.com/val/ranked/v1/leaderboards/by-act/'+actData+'?size=200&startIndex=0&api_key='+api;
 
-    //Get puuid of the player
-    for (var i = 0; i < data.players.length; i++){
-        if (data.players[i].gameName == PlayerName){
-            playerpuuid =  data.players[i].puuid;
-        }
-    }
-    //search for players last match using the puuid
-    for (var i = 0; i < data.matches.length; i++){
-        for (var j = 0; j < data.matches[i].players.length; j++){
-            if (data.matches[i].players[j].puuid == playerpuuid){
-                rank = data.matches[i].players[j].competitiveTier;
-                //get date of the match the rank is from
-                var timestamp = data.matches[i].matchInfo.gameStartMillis;
-                var date = new Date(timestamp);
-                var hours = date.getHours();
-                var minutes = "0" + date.getMinutes();
-                var seconds = "0" + date.getSeconds();
-                var jahr = date.getFullYear();
-                var month = date.getMonth() + 1;
-                var day = date.getDate();
-                timecode = month + '/' + day + '/' + jahr + ' | ' + hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+        //execute API request
+        fetch(requestURL2).then (function(response) {
+
+            //check for response error
+            if (response.status !== 200){
+                console.log('Can´t access VALORANT Ranked API. Error Code: '+ response.status);
+                return;
+            }
+
+            //filter rank and the rating out of the response json and return the result async
+            response.json().then(function(data){
+                var rank = [];
+                for (var i = 0; i < data.players.length; i++) {
+                    if (data.players[i].gameName == PlayerName){
+                        rank.push(data.players[i].leaderboardRank);
+                        rank.push(data.players[i].rankedRating);
+                    }
+                }
+                return callback(rank);
+            });
+        });
+    });
+}
+
+//Handle get requests
+router.get('/', (req, res, next) => {
+    res.status(200).json({
+        message: 'Forgot the player name.'
+    });
+  });
+
+//Handle username requests
+router.get('/:UserN', (req, res, next) => {
+    PlayerName = req.params.UserN;
+
+    //Execute rank function to get rank of requested user
+    getRank(function(rankedData){
+        
+        //check for playernames that I allow people to search for
+        if (PlayerName === 'omniprimus' || PlayerName === 'Fl4mezzZ' || PlayerName === 'BUTCHERKnqdewL') {
+
+            //check if response array is empty
+            if (rankedData.length !== 0) {
+
+                //rank output
+                res.status(200).json({
+                    Player: PlayerName,
+                    Rank: rankedData[0],
+                    RankedRating: rankedData[1]
+                });
+            }
+            //Player is not in Top 200
+            else {
+                res.status(200).json({
+                    message: 'Player is not listed'
+                });
             }
         }
-    }
-    return rank;
-}
-
-//Handle get request
-router.get('/', async (req, res, next) => {
-    const message = await getRank();
-    res.status(200).json({
-        Player: PlayerName,
-        Rank: message,
-        Date: timecode
-    })
+        //Player is not in my list
+        else {
+            res.status(200).json({
+                message: 'This streamer/player is not supported'
+            })
+        }
+    });
 });
 
 module.exports = router
