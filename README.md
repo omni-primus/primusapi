@@ -46,5 +46,5 @@ After successfully installing the tool open the site in your browser. Most likly
 
 ```
 http://localhost:3000/league/omni_primus
-http://localhost:3000/valorant/
+http://localhost:3000/valorant/omni_primus
 ```
