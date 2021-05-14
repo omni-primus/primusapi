@@ -88,7 +88,7 @@ router.get('/:SummonerName', (req, res, next) => {
     requestURL = 'https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/'+name+'?api_key='+api;
     getELo();
     setTimeout(function(){
-        if (SName === 'omniprimus' || SName === 'Fl4mezzZ'){
+        if (SName === 'omniprimus' || SName === 'Fl4mezzZ' || SName === 'BeaterZack'){
             res.status(200).json({
                 message: text
             });
